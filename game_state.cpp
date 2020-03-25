@@ -37,13 +37,13 @@ void GameState::make_move(int position)
         board[position] = 'X';
     else
         board[position] = 'O';
-    number_of_empty_positions -= 1;
-}
+    number_of_empty_positions--;
+}  
 
 void GameState::undo_move(int position)
 {
     board[position] = ' ';
-    number_of_empty_positions += 1;
+    number_of_empty_positions++;
 }
 
 bool GameState::three_in_a_row(int position) const
