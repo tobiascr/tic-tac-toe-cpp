@@ -6,6 +6,7 @@ void print_board(EngineAPI& engine)
     char board[9];
     for (int n=0; n<=8; n++)
         board[n] = engine.get_value(n);
+    std::cout << std::endl;
     std::cout << " --- --- ---" << std::endl
     << "| " << board[0] << " | " << board[1] << " | " << board[2]
     << " |" << std::endl << " --- --- ---" << std::endl
@@ -13,14 +14,19 @@ void print_board(EngineAPI& engine)
     << " |" << std::endl << " --- --- ---" << std::endl
     << "| " << board[6] << " | " << board[7] << " | " << board[8]
     << " |" << std::endl << " --- --- ---" << std::endl;
+    std::cout << std::endl;
 }
 
 int main()
 {
     EngineAPI engine;
     char answer[20];
-    bool exit_program = false;
     int move;
+    bool player_is_X = true;
+    bool player_in_turn = true;
+    bool game_over = false;
+    int player_wins = 0;
+    int computer_wins = 0;
 
     std::cout << std::endl;
     std::cout << "The squares are numbered as follows:" << std::endl;
@@ -38,41 +44,134 @@ int main()
     std::cout << "Print q to quit." << std::endl;
     std::cout << std::endl;
 
-    std::cout << "Difficulty level (1-3): ";
-    std::cin >> answer;
-    switch (answer[0])
+    while (true)
     {
-        case '1': engine.set_difficulty_level(1); break;
-        case '2': engine.set_difficulty_level(2); break;
-        case '3': engine.set_difficulty_level(3); break;
-        case 'q': exit_program = true; break;
-    }
-
-    if (not exit_program)
-    {
-        std::cout << std::endl;
-        print_board(engine);
-        std::cout << std::endl;
-    }
-
-    while (not engine.board_full() and not exit_program)
-    {
-        std::cout << "Input: ";
-        std::cin >> move;
-        engine.make_move(move);
-        print_board(engine);
-        if (engine.three_in_a_row(move))
+        std::cout << "Difficulty level (1-3): ";
+        std::cin >> answer;
+        if (answer[0] == '1')
         {
-            std::cout << "You win!" << std::endl;
+            engine.set_difficulty_level(1);
             break;
         }
-        move = engine.engine_move();
-        engine.make_move(move);
-        print_board(engine);
+        if (answer[0] == '2')
+        {
+            engine.set_difficulty_level(2);
+            break;
+        }
+        if (answer[0] == '3')
+        {
+            engine.set_difficulty_level(3);
+            break;
+        }
+        if (answer[0] == 'q')
+            return 0;
+    }
+
+    while (true)
+    {
+        if (player_in_turn)
+        {
+            // Player makes a move.
+            print_board(engine);
+            move = -1;
+            while (true)
+            {
+                if (player_is_X)
+                    std::cout << "X to move: ";
+                else
+                    std::cout << "O to move: ";
+                std::cin >> answer;
+
+                if (answer[0] == '0')
+                    move = 0;
+                if (answer[0] == '1')
+                    move = 1;
+                if (answer[0] == '2')
+                    move = 2;
+                if (answer[0] == '3')
+                    move = 3;
+                if (answer[0] == '4')
+                    move = 4;
+                if (answer[0] == '5')
+                    move = 5;
+                if (answer[0] == '6')
+                    move = 6;
+                if (answer[0] == '7')
+                    move = 7;
+                if (answer[0] == '8')
+                    move = 8;
+                if (answer[0] == 'q')
+                    return 0;
+
+                if (0 <= move and move <= 8)
+                {
+                    if (engine.legal_move(move))
+                        break;
+                    else
+                        std::cout << "Invalid move." << std::endl;
+                        move = -1;
+                }
+            }
+            engine.make_move(move);
+        }
+        else
+        {
+            // Computer makes a move.
+            move = engine.engine_move();
+            engine.make_move(move);
+        }
+
+        // If three in a row.
         if (engine.three_in_a_row(move))
         {
-            std::cout << "Computer win." << std::endl;
-            break;
+            game_over = true;
+            print_board(engine);
+            if (player_in_turn)
+            {
+                std::cout << "You win!" << std::endl;
+                player_wins++;
+            }
+            else
+            {
+                std::cout << "Computer win." << std::endl;
+                computer_wins++;
+            }
+        }
+        else // If draw.
+            if (engine.board_full())
+            {
+                game_over = true;
+                print_board(engine);
+                std::cout << "Draw" << std::endl;
+            }
+
+        player_in_turn = not player_in_turn;
+
+        if (game_over)
+        {
+            std::cout << std::endl;
+            while (true)
+            {
+                std::cout << "Player - Computer: " << player_wins
+                          << " - " << computer_wins <<  std::endl << std::endl;
+                std::cout << "Play again (y/n)? ";
+                std::cin >> answer;
+                if (answer[0] == 'y')
+                {
+                    game_over = false;
+                    engine.new_game();
+                    player_is_X = not player_is_X;
+                    if (player_is_X)
+                        player_in_turn = true;
+                    else
+                        player_in_turn = false;
+                    break;
+                }
+                if (answer[0] == 'n')
+                    return 0;
+                if (answer[0] == 'q')
+                    return 0;
+            }
         }
     }
 
