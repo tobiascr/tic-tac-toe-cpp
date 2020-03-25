@@ -1,6 +1,27 @@
 #include <iostream>
 #include "engine_API.h"
 
+void first_move_test(EngineAPI& engine)
+// Test how often each first move occurs.
+{
+    int number[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int trials = 10000;
+    engine.new_game();
+    for (int n=1; n<=trials; n++)
+    {
+        number[engine.engine_move()]++;
+    }
+    std::cout << "0: " << number[0] << " times" << std::endl;
+    std::cout << "1: " << number[1] << " times" << std::endl;
+    std::cout << "2: " << number[2] << " times" << std::endl;
+    std::cout << "3: " << number[3] << " times" << std::endl;
+    std::cout << "4: " << number[4] << " times" << std::endl;
+    std::cout << "5: " << number[5] << " times" << std::endl;
+    std::cout << "6: " << number[6] << " times" << std::endl;
+    std::cout << "7: " << number[7] << " times" << std::endl;
+    std::cout << "8: " << number[8] << " times" << std::endl;
+}
+
 int single_game(EngineAPI& engine1, EngineAPI& engine2, bool engine1_begin)
 // Let engine1 and engine2 play a game against each other.
 // Return 1 if engine1 wins, 0 if draw and 2 if engine2 wins.
@@ -67,6 +88,8 @@ int main()
     std::cout << "Engine 1 wins: " << engine1_wins << std::endl;
     std::cout << "Engine 2 wins: " << engine2_wins << std::endl;
     std::cout << "Draws: " << draws << std::endl;
+
+    first_move_test(engine2);
 }
 
 

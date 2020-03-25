@@ -31,6 +31,9 @@ int random_engine_move(GameState& game_state, int depth);
    is chosen randomly.
 */
 
+int random_first_move();
+//Return a random move where the central move is made more likely to occur.
+
 int engine_move_easy(GameState& game_state);
 
 int engine_move_medium(GameState& game_state);
