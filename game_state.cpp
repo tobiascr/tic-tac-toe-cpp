@@ -16,10 +16,10 @@ void GameState::reset()
     number_of_empty_positions = 9;
 }
 
-bool GameState::X_in_turn() const
-{
-    return (number_of_empty_positions % 2) == 1;
-}
+//bool GameState::X_in_turn() const
+//{
+//    return (number_of_empty_positions % 2) == 1;
+//}
 
 bool GameState::position_empty(int position) const
 {
@@ -33,12 +33,12 @@ char GameState::get_value(int position) const
 
 void GameState::make_move(int position)
 {
-    if (X_in_turn())
+    if ((number_of_empty_positions % 2) == 1)
         board[position] = 'X';
     else
         board[position] = 'O';
     number_of_empty_positions--;
-}  
+}
 
 void GameState::undo_move(int position)
 {
