@@ -16,11 +16,6 @@ void GameState::reset()
     number_of_empty_positions = 9;
 }
 
-//bool GameState::X_in_turn() const
-//{
-//    return (number_of_empty_positions % 2) == 1;
-//}
-
 bool GameState::position_empty(int position) const
 {
     return board[position] == ' ';

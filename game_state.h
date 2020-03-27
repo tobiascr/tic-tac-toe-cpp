@@ -8,8 +8,6 @@ public:
 
     void reset();
 
-//    bool X_in_turn() const;
-
     bool position_empty(int position) const;
 
     char get_value(int position) const;
