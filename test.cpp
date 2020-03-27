@@ -88,6 +88,8 @@ int main()
     std::cout << "Engine 1 wins: " << engine1_wins << std::endl;
     std::cout << "Engine 2 wins: " << engine2_wins << std::endl;
     std::cout << "Draws: " << draws << std::endl;
+
+    return 0;
 }
 
 
