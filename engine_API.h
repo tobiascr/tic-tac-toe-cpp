@@ -36,6 +36,8 @@ public:
 
     char get_value(int position);
     // Return 'X', 'O' or ' ' that corresponds to the given position on the board.
+    // 'X' represents the player making the first move, 'O' the second move and ' ' that
+    // the position is empty.
 
     bool three_in_a_row(int position);
     // True iff the given position is a part of a three in a row. This can be used
