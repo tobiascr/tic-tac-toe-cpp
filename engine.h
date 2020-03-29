@@ -3,9 +3,7 @@
 
 #include "game_state.h"
 
-/* Positions are represented as lists of length 9 where each entry is " ", "X" or "O"
- (the letter O). The diagram below shows which square corresponds to
- which place in the list.
+/* Positions are labeled as in the diagram below.
 
   --- --- ---
  | 0 | 1 | 2 |

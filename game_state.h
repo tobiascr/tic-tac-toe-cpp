@@ -11,7 +11,9 @@ public:
     bool position_empty(int position) const;
 
     char get_value(int position) const;
-    // Return 'X', 'O' or ' '.
+    // Return 'X', 'O' or ' ' depending on the state of the corresponding position.
+    // 'X' represents the player making the first move, 'O' the second move and ' ' that
+    // the position is empty.
 
     void make_move(int position);
 
