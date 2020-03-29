@@ -35,14 +35,14 @@ public:
     bool board_full();
 
     char get_value(int position);
-    // Return 'X', 'O' or ' ' that corresponds to the given position on the board.
-    // 'X' represents the player making the first move, 'O' the second move and ' ' that
-    // the position is empty.
+    /* Return 'X', 'O' or ' ' depending on the state of the corresponding position.
+       'X' represents the player making the first move, 'O' the player making
+       second move and ' ' that the position is empty.*/
 
     bool three_in_a_row(int position);
-    // True iff the given position is a part of a three in a row. This can be used
-    // both for finding if it's game over and for highligting three in a rows after
-    // a game is finished.
+    /*) True iff the given position is a part of a three in a row. This can be used
+        both for finding if it's game over and for highligting three in a rows after
+        a game is finished. */
 
 private:
     GameState game_state;
