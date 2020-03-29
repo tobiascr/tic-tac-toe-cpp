@@ -20,17 +20,15 @@ int negamax(GameState& game_state, int last_move, int depth);
 /* Compute a value of game_state. Return a positive integer for a winning game_state for
    the player in turn, 0 for a draw and a negative integer for a loss. A win or loss in_row
    fewer moves gives a higher score in absolute value. last_move is the last position
-   where a move has been made to.
-*/
+   where a move has been made to.*/
 
 int random_engine_move(GameState& game_state, int depth);
 /* Return an integer from 0 to 8 that represents a best move made by the engine
    at the given depth level. If there are several equally good moves, one of them
-   is chosen randomly.
-*/
+   is chosen randomly.*/
 
 int random_first_move();
-//Return a random move where the central move is made more likely to occur.
+// Return a random move where the central move is made more likely to occur.
 
 int engine_move_easy(GameState& game_state);
 

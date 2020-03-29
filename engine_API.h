@@ -40,9 +40,9 @@ public:
        second move and ' ' that the position is empty.*/
 
     bool three_in_a_row(int position);
-    /*) True iff the given position is a part of a three in a row. This can be used
-        both for finding if it's game over and for highligting three in a rows after
-        a game is finished. */
+    /* True iff the given position is a part of a three in a row. This can be used
+       both for finding if it's game over and for highligting three in a rows after
+       a game is finished.*/
 
 private:
     GameState game_state;
